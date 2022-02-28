@@ -18,14 +18,8 @@ public class playerLaser : MonoBehaviour
           fireLaser ();
         }
     }
-    /*
-    * Function to instantiate a projectile. To avoid memory leak, it's desctruction will be timed
-    * @method fireLaser
-    */
+
     void fireLaser() {
-       Destroy(
-           Instantiate (laserPrefab, this.gameObject.transform.position, Quaternion.identity),
-           1
-       );
+       Instantiate (laserPrefab, this.gameObject.transform.position, Quaternion.identity);
     }
 }
