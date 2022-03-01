@@ -35,6 +35,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (colliderObject.tag == "player_laser")
         {
+            GameManager.instance.addScore(enemy1Points);
             Destroy(this.gameObject);
         }
     }
