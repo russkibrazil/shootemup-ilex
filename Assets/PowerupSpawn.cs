@@ -9,6 +9,7 @@ public class PowerupSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // TODO: SEND RANDOMIZER TO spawnPowerUp()
         // To avoid predictability, the powerup spawn time will be randomized after the first one...
         InvokeRepeating("spawnPowerUp", spawnInterval, spawnInterval* Random.value * 5);
     }

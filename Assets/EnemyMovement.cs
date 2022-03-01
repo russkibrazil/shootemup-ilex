@@ -18,7 +18,7 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        dest = (Vector2)transform.position + Vector2.right;
+        dest = (Vector2)transform.position + (Vector2.right * 0.8f);
         Vector2 p = Vector2.MoveTowards(transform.position, dest, STEP_ANIMATION);
         GetComponent<Rigidbody2D>().MovePosition(p);
         if (Random.value >= 0.9)
@@ -29,6 +29,14 @@ public class EnemyMovement : MonoBehaviour
     
     void OnBecameInvisible(){
         Destroy(this.gameObject);
+    }
+    
+    void OnTriggerEnter2D(Collider2D colliderObject)
+    {
+        if (colliderObject.tag == "player_laser")
+        {
+            Destroy(this.gameObject);
+        }
     }
     
 

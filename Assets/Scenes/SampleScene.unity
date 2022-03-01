@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 1785589782}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -368,6 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b77dff0bbe4adbabd50821d2679ac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shield: {fileID: 7843241634779299518, guid: 7391429d1b8602bbe9f3cda4b775c7cf, type: 3}
 --- !u!212 &1785589778
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -407,7 +408,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 6c17e47706fda4072b6436add9d8bc55, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -499,6 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserPrefab: {fileID: 1672780600688799172, guid: 529031704ac331589babbe6f682c5c59, type: 3}
+  specialWeaponPrefab: {fileID: 8787619959540877168, guid: 2098815c5b00cf9a6921888b1048727e, type: 3}
 --- !u!1 &2055789889
 GameObject:
   m_ObjectHideFlags: 0

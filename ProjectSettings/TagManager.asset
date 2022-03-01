@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - powerup
+  - enemy_laser
+  - player_laser
+  - shield
   layers:
   - Default
   - TransparentFX

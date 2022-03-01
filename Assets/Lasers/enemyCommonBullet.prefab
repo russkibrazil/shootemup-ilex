@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4867843166432891297}
   m_Layer: 0
   m_Name: enemyCommonBullet
-  m_TagString: Untagged
+  m_TagString: enemy_laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
