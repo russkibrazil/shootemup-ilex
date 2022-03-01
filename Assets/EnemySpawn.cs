@@ -19,6 +19,17 @@ public class EnemySpawn : MonoBehaviour
     }
     
     void spawnNext() {
-        Instantiate(enemyT1, transform.position, Quaternion.identity);
+        float random = Random.value * 3;
+        if (random < 1)
+        {
+            Instantiate(enemyT1, (Vector2)transform.position - (2 * Vector2.up), Quaternion.identity);
+            return;
+        }
+        if (random < 2)
+        {
+            Instantiate(enemyT2, (Vector2)transform.position - Vector2.up, Quaternion.identity);
+            return;
+        }
+        Instantiate(enemyT3, transform.position, Quaternion.identity);
     }
 }

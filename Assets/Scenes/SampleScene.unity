@@ -376,9 +376,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyT1: {fileID: 3041870071791695028, guid: c4f9b0f30414f1fa98dfd214488a0b1f, type: 3}
-  enemyT2: {fileID: 0}
-  enemyT3: {fileID: 0}
-  spawnInterval: 3
+  enemyT2: {fileID: 1090832292723684148, guid: 66a5d41e348f1ee099a15ed24cf1b8e2, type: 3}
+  enemyT3: {fileID: 6742591046518527724, guid: 9edb07ed3e1b678aeb6f87d974d43d94, type: 3}
+  spawnInterval: 2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
