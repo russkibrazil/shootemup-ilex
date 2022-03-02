@@ -13,7 +13,9 @@ public class playerLaser : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate () {
+    void FixedUpdate () 
+    {
+        // the player can shoot using Q, Space and Left Shift
         if (Input.GetKey("space"))
         {
             fireLaser();
@@ -28,13 +30,16 @@ public class playerLaser : MonoBehaviour
         }
     }
 
+    // a simple laser straight up
     void fireLaser()
     {
        Instantiate(laserPrefab, this.gameObject.transform.position, Quaternion.identity);
     }
     
+    // shots lasers to left and right, simultaneously
     void fireSecondary()
     {
+        // We do some math to rotate the prefab before instantiation
         Quaternion quatRotateLeft = Quaternion.Euler(0, 0, 30);
         Quaternion quatRotateRight = Quaternion.Euler(0, 0, -30);
         Instantiate(laserPrefab, this.gameObject.transform.position, quatRotateLeft);
@@ -43,6 +48,7 @@ public class playerLaser : MonoBehaviour
     
     void fireSpecial()
     {
+        // if the player has the Weapon powerup active, we shoot a bigger laser
         int playerState = GetComponent<playerMovement>().getPlayerState();
         if (playerState == (int) playerMovement.PlayerState.WeaponBoost)
         {

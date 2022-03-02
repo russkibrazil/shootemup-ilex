@@ -13,10 +13,9 @@ public class GameManager : MonoBehaviour
     
     void Awake()
     {
-        // if it doesn't exist
+        // if gamemanager doesn't exist, set the instance to the current object
         if(instance == null)
         {
-            // Set the instance to the current object (this)
             instance = this;
         }
         // There can only be a single instance of the game manager
@@ -31,8 +30,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        resetScore();
-        
+        resetScore();  
     }
 
     // Update is called once per frame
@@ -43,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     public void addScore(int pointsToAdd)
     {
+        // add the points and refresh the hud
         score += pointsToAdd;
         hudManager.GetComponent<HudManager>().updatePointsText();
     }

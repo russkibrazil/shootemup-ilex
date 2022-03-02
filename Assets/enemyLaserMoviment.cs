@@ -14,6 +14,7 @@ public class enemyLaserMoviment : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        // Push the laser down
         transform.position -= Vector3.up;
     }
     

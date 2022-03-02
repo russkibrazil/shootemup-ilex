@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 37df162b817311ee2a24b0ba54e639c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -145,3 +145,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserEnemy1: {fileID: 7048897422689663779, guid: 3e6c8866c2c7a98639624a43fb63c890, type: 3}
+  enemy1Hp: 1
+  enemy1Points: 1

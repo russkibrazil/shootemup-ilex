@@ -9,6 +9,7 @@ public class EnemySpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Spawn enemies repeatedly
         InvokeRepeating("spawnNext", spawnInterval, spawnInterval*2);
     }
 
@@ -18,6 +19,7 @@ public class EnemySpawn : MonoBehaviour
         
     }
     
+    // The enemy type spawned is random, but each type get spawned at specific points
     void spawnNext() {
         float random = Random.value * 3;
         if (random < 1)

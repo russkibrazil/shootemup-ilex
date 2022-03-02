@@ -34,9 +34,9 @@ public class playerMovement : MonoBehaviour
         Vector2 p = Vector2.MoveTowards(transform.position, dest, STEP_ANIMATION);
         GetComponent<Rigidbody2D>().MovePosition(p);
         
-        if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && valid(Vector2.right) && insideScreen(Vector2.right))
+        if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && insideScreen(Vector2.right))
             dest = (Vector2)transform.position + Vector2.right;
-        if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && valid(-Vector2.right) && insideScreen(-Vector2.right))
+        if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && insideScreen(-Vector2.right))
             dest = (Vector2)transform.position - Vector2.right;
     }
     
@@ -61,6 +61,7 @@ public class playerMovement : MonoBehaviour
     void OnDisable()
     {
         // Show the player again after the spaceship has exploded
+        // Meanwhile, set a proper state
         Invoke("respawnPlayer", 4.0f);
         state = PlayerState.Respawn;
     }
@@ -69,14 +70,6 @@ public class playerMovement : MonoBehaviour
         Vector2 nextPos = (Vector2)transform.position + pos;
         //cam = UnityEngine.Camera.main;
         return (nextPos.x > 0 && nextPos.x < 16);
-    }
-    
-    bool valid(Vector2 dir) {
-        // Let's be sure anything hit me
-        // Vector2 pos = transform.position;
-        // RaycastHit2D hit = Physics2D.Linecast(pos + dir, pos);
-        // return (hit.collider == GetComponent<Collider2D>());
-        return true;
     }
     
     void destroyPlayer()
@@ -106,6 +99,10 @@ public class playerMovement : MonoBehaviour
     {
         string objectName = powerup.gameObject.name;
         float powerupDuration = 0.0f;
+        // The player's next state should be carefully selected. A powerup
+        // must not be activated when the player is dead. Powerup overlapping
+        // is possible, though a random event, so this case must not deactivate
+        // other acive powerups
         if (objectName.StartsWith("weapon"))
         {
             switch (state)

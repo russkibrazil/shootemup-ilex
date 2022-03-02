@@ -19,6 +19,7 @@ public class HudManager : MonoBehaviour
     
     public void updatePointsText()
     {
+        // show player's ponts with 8 digits
         scoreLabel.text = GameManager.instance.getScore().ToString().PadLeft(8,'0');
     }
 }

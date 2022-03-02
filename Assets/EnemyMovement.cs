@@ -13,12 +13,14 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // just a safety measure against invalid values
         if (enemy1Hp < 1)
             enemy1Hp = 1;
         actualHp = enemy1Hp;
     }
 
-    // Update is called once per frame
+    // This rustic AI is capable of moving to the right (a little slower than
+    // the player can) and shooting "whenever" it wants
     void FixedUpdate()
     {
         dest = (Vector2)transform.position + (Vector2.right * 0.8f);
@@ -36,6 +38,8 @@ public class EnemyMovement : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D colliderObject)
     {
+        // When the player laser hits a enemy ship, the enemy life is
+        // decreased and the ship removed when the enemy is dead
         if (colliderObject.tag == "player_laser")
         {
             Destroy(colliderObject.gameObject);
