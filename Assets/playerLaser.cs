@@ -18,6 +18,10 @@ public class playerLaser : MonoBehaviour
         {
             fireLaser();
         }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            fireSecondary();
+        }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             fireSpecial();
@@ -27,6 +31,14 @@ public class playerLaser : MonoBehaviour
     void fireLaser()
     {
        Instantiate(laserPrefab, this.gameObject.transform.position, Quaternion.identity);
+    }
+    
+    void fireSecondary()
+    {
+        Quaternion quatRotateLeft = Quaternion.Euler(0, 0, 30);
+        Quaternion quatRotateRight = Quaternion.Euler(0, 0, -30);
+        Instantiate(laserPrefab, this.gameObject.transform.position, quatRotateLeft);
+        Instantiate(laserPrefab, this.gameObject.transform.position, quatRotateRight);
     }
     
     void fireSpecial()
