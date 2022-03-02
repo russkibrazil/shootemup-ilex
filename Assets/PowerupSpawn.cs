@@ -9,9 +9,8 @@ public class PowerupSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // TODO: SEND RANDOMIZER TO spawnPowerUp()
-        // To avoid predictability, the powerup spawn time will be randomized after the first one...
-        InvokeRepeating("spawnPowerUp", spawnInterval, spawnInterval* Random.value * 5);
+        // From time to time, we will drop an item to the player...
+        InvokeRepeating("spawnPowerUp", spawnInterval, spawnInterval);
     }
 
     // Update is called once per frame
@@ -19,15 +18,22 @@ public class PowerupSpawn : MonoBehaviour
     {
         
     }
-    // ... and the selected powerup is randomized, too!
+
     void spawnPowerUp()
     {
-        Object pwr = powerup1;
-        if (Random.value > 0.5)
+        // ... but the drop only occurs if a lucky value is above the threshold
+        if (Random.value > 0.75)
         {
-            pwr = powerup2;
+            // ... and the selected powerup is randomized, too!
+            Object pwr = powerup1;
+            if (Random.value > 0.5)
+            {
+                pwr = powerup2;
+            }
+            int left = Random.value < 0.5f ? 1 : 0-1;
+            Vector3 dropPosition = new Vector3(Random.value * 7 * left, transform.position.y, 0);
+            // Ensuring the powerup is destroyied if not collected
+            Destroy(Instantiate(pwr, dropPosition, Quaternion.identity), spawnInterval);        
         }
-        // Ensuring the powerup is destroyied if not collected
-        Destroy(Instantiate(pwr, transform.position, Quaternion.identity), spawnInterval);
     }
 }
