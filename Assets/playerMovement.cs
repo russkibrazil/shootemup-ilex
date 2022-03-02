@@ -15,6 +15,7 @@ public class playerMovement : MonoBehaviour
         ShieldAndWeaponBoost
     }
     public GameObject shield;
+    public AudioSource audioShieldUp, audioShieldDown;
     private Vector2 dest = Vector2.zero;
     private PlayerState state = PlayerState.Respawn;
     private Queue<PlayerState> powerupQueue;
@@ -99,6 +100,7 @@ public class playerMovement : MonoBehaviour
     
     // When a powerup hits the player, the powerup is activated
     // and the respective object removed from the screen.
+    // When a Shield is activated, a sound is played.
     // Elapsed powerup duration, the player state is "normal" again
     void activatePowerup(Collider2D powerup)
     {
@@ -106,27 +108,40 @@ public class playerMovement : MonoBehaviour
         float powerupDuration = 0.0f;
         if (objectName.StartsWith("weapon"))
         {
-            if (state == PlayerState.Shielded)
+            switch (state)
             {
-                state = PlayerState.ShieldAndWeaponBoost;
-            }
-            else
-            {
-                state = PlayerState.WeaponBoost;
+                case PlayerState.Shielded:
+                    state = PlayerState.ShieldAndWeaponBoost;
+                    break;
+                
+                case PlayerState.Alive:
+                    state = PlayerState.WeaponBoost;
+                    break;
+
+                default:
+                    break;
             }
             powerupQueue.Enqueue(PlayerState.WeaponBoost);
             powerupDuration = 15.0f;
         }
         else
         {
-            if (state == PlayerState.WeaponBoost)
+            switch (state)
             {
-                state = PlayerState.ShieldAndWeaponBoost;
+                case PlayerState.WeaponBoost:
+                    state = PlayerState.ShieldAndWeaponBoost;
+                    audioShieldUp.Play();
+                    break;
+
+                case PlayerState.Alive:
+                    state = PlayerState.Shielded;
+                    audioShieldUp.Play();
+                    break;
+                
+                default:
+                    break;
             }
-            else
-            {
-                state = PlayerState.Shielded;
-            }
+
             powerupQueue.Enqueue(PlayerState.Shielded);
             powerupDuration = 10.0f;
             Destroy(Instantiate(shield, transform.position, Quaternion.identity), powerupDuration);
@@ -139,17 +154,23 @@ public class playerMovement : MonoBehaviour
     // so there's a queue helping to determinate the player's state when a powerup expirates.
     // We may use this method to reenable the player in the scene, but we must clear the queue
     // before doing so.
+    // If theres no more shield powerups enqueued, play a sound
     void resetPlayerState()
     {
+        PlayerState removed = 0;
         try
         {
-            powerupQueue.Dequeue();
+            removed = powerupQueue.Dequeue();
         }
         catch (System.InvalidOperationException e)
         {}
         if (powerupQueue.Count == 0)
         {
             state = PlayerState.Alive;
+            if (removed == PlayerState.Shielded)
+            {
+                audioShieldDown.Play();
+            }
             return;
         }
         
@@ -159,7 +180,10 @@ public class playerMovement : MonoBehaviour
         }
         
         state = powerupQueue.Peek();
-        
+        if (state == PlayerState.WeaponBoost)
+        {
+            audioShieldDown.Play();
+        }
         
     }
     
