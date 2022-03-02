@@ -9,10 +9,13 @@ public class EnemyMovement : MonoBehaviour
     public int enemy1Hp = 1;
     public int enemy1Points = 1;
     private Vector2 dest = Vector2.zero;
+    private int actualHp;
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (enemy1Hp < 1)
+            enemy1Hp = 1;
+        actualHp = enemy1Hp;
     }
 
     // Update is called once per frame
@@ -35,10 +38,18 @@ public class EnemyMovement : MonoBehaviour
     {
         if (colliderObject.tag == "player_laser")
         {
-            GameManager.instance.addScore(enemy1Points);
-            Destroy(this.gameObject);
+            Destroy(colliderObject.gameObject);
+            if (takeHitAndDie())
+            {
+                GameManager.instance.addScore(enemy1Points);
+                Destroy(this.gameObject);            
+            }
         }
     }
     
-
+    // This method remove 1 HP and return *true* if the enemy life equals zero (therefore, is dead)
+    bool takeHitAndDie()
+    {
+        return --actualHp == 0;
+    }
 }
